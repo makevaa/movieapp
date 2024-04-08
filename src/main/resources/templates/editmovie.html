@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}" />
+    <title>Edit movie</title>
+</head>
+<body>
+    <h1>Edit movie</h1>
+
+    <form action="#" th:action="@{/savemovie}" method="post" th:object="${movie}">
+        <p> Title: <input type="text" th:field="${movie.title}" /> </p>
+        <p> Publication year: <input type="text" th:field="${movie.releaseYear}" /> </p>
+
+        <input type="hidden" th:field="${movie.movieid}" />
+        <input type="submit" value="Save changes" />
+    </form>
+    
+</body>
+</html>

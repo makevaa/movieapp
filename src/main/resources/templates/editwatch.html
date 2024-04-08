@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}" />
+    <title>Edit watch</title>
+</head>
+<body>
+    <h1>Edit watch</h1>
+
+    <form action="#" th:action="@{/savewatch}" method="post" th:object="${watch}">
+        <p> Date: <input type="date" placeholder="dd.mm.yyyy" th:field="${watch.date}" /> </p>
+
+        <p>
+            <label for="movie-list">Movie:</label>
+            <select id="movie-list" th:field="*{movie}">
+                <option th:each="movie: ${movies}" 
+                        th:value="${movie.movieid}" 
+                        th:text="${movie.title}">
+                </option>
+            </select>
+        </p>
+       
+        <p> Comment: <input type="text" th:field="${watch.comment}" style="width: 300px;"  /> </p>
+        <input type="hidden" th:field="${watch.watchid}" />
+        <br><br>
+        <input type="submit" value="Save changes"  />
+    </form>
+</body>
+</html>

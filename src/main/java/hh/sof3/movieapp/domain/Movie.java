@@ -1,9 +1,11 @@
 package hh.sof3.movieapp.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +13,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "movie") 
@@ -19,45 +23,40 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = "id")
-    private Long id;
+    @Column (name = "movieid")
+    private Long movieid;
 
     private String title;
-    private String author;
 
     @Column (name = "releaseYear")
     private Integer releaseYear;
+    
 
-    /* 
-    @ManyToOne
-    @JsonIgnoreProperties ("books") 
-    @JoinColumn(name = "categoryid")
-    private Category category;
-    */
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
+    @JsonIgnoreProperties("movie") 
+    private List<Watch> watches;
+    
 
     public Movie() {
         super();
         this.title = null;
-        this.publicationYear = null;
+        this.releaseYear = null;
     }
 
-    public Book(String title, String author, Integer publicationYear, String isbn, double price, Category category) {
+    public Movie(String title, Integer releaseYear) {
         super();
         this.title = title;
-        this.author = author;
-        this.publicationYear = publicationYear;
-        this.isbn = isbn;
-        this.price = price;
-        this.category = category;
+        this.releaseYear = releaseYear;
     }
 
 
-    public Long getId() {
-        return id;
+    public Long getMovieid() {
+        return movieid;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setMovieid(Long movieid) {
+        this.movieid = movieid;
     }
 
     public String getTitle() {
@@ -68,54 +67,27 @@ public class Movie {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+
+    public Integer getReleaseYear() {
+        return releaseYear;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
-    public Integer getPublicationYear() {
-        return publicationYear;
+    public List<Watch> getWatches() {
+        return watches;
     }
 
-    public void setPublicationYear(Integer publicationYear) {
-        this.publicationYear = publicationYear;
-    }
-
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
+    public void setWatches(List<Watch> watches) {
+        this.watches = watches;
     }
 
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", isbn=" + isbn + ", price=" + price
-                + ", publicationYear=" + publicationYear + ", category=" + category + "]";
+        return "Movie [movieid=" + movieid + ", title=" + title + ", releaseYear=" + releaseYear + "]";
     }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-
-
 
 
 }

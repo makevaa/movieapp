@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}" />
+    <title>Add movie</title>
+</head>
+<body>
+    <h1>Add movie</h1>
+
+    <form action="#" th:action="@{/savemovie}" method="post" th:object="${movie}">
+        <p> Title: <input type="text" th:field="${movie.title}" /> </p>
+        <p> Release year: <input type="text" th:field="${movie.releaseYear}" /> </p>
+
+        <!--
+        <label for="category-list">Movie tags:</label>
+        <select id="category-list" th:field="*{category}">
+            <option th:each="category: ${categories}" 
+                    th:value="${category.categoryid}" 
+                    th:text="${category.name}">
+            </option>
+        </select>
+        -->
+
+
+        <br><br>
+        <input type="submit" value="Save new movie"  />
+    </form>
+    
+</body>
+</html>
