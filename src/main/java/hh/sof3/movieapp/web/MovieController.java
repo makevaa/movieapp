@@ -6,7 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import hh.sof3.movieapp.domain.Movie;
 import hh.sof3.movieapp.domain.MovieRepository;
+import jakarta.validation.Valid;
 
 @CrossOrigin
 @Controller
@@ -42,7 +45,6 @@ public class MovieController {
         return "movielist";
     }
 
-    //https://www.w3schools.com/howto/howto_js_filter_dropdown.asp
     // Show "Add movie" page
     @RequestMapping(value="/addmovie", method=RequestMethod.GET)
     public String showAddMovie(Model model) {
@@ -52,7 +54,7 @@ public class MovieController {
     }
 
     // Show "Edit movie" page
-    @RequestMapping(value="movies/{id}/edit", method=RequestMethod.GET)
+    @RequestMapping(value="/editmovie/{id}", method=RequestMethod.GET)
     public String showEditPage(@PathVariable("id") Long movieId, Model model) {
         Movie movie = movieRepository.findById(movieId).get();
         model.addAttribute("movie", movie);
@@ -61,16 +63,20 @@ public class MovieController {
 
     // Save new movie (or update if Movie has id)
     @RequestMapping(value="/savemovie", method=RequestMethod.POST)
-    public String save(Movie movie) {
-        movieRepository.save(movie);
-        return "redirect:movielist";
+    public String save( @Valid  @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) { // validation errors 
+			return "addmovie";  // return back to form
+		} else { // no validation errors
+            movieRepository.save(movie);
+            return "redirect:movielist";
+		}
     }
 
     // Delete movie
-    @RequestMapping(value="movies/{id}/delete", method=RequestMethod.GET)
+    @RequestMapping(value="/deletemovie/{id}", method=RequestMethod.GET)
     public String DeleteMovieById(@PathVariable("id") Long movieId, Model model) {
         movieRepository.deleteById(movieId);
-        return "redirect:../../movielist";
+        return "redirect:../movielist";
     }
 
 }

@@ -10,38 +10,49 @@
     <title>Watches</title>
 </head>
 <body>
-    <h1>Watches</h1>
-
-    <form th:action="@{/logout}" method=
-        "post">
-        <input type="submit" value="Sign Out"/>
-    </form>
-
-    <div>
-        <h3>Hello <span sec:authentication="name"></span>!</h3>
+    <div id="topbar">
+        <div class="title">MovieApp</div>
+        <div class="menu">
+            <a href="/movielist" class="item">Movies</a>
+            <a href="/watchlist" class="item selected">Watches</a>
+            <a href="/addmovie" class="item">Add movie</a>
+            <a href="/addwatch" class="item">Add watch</a>
+        </div>
+        <div id="user-container">
+            <span class="username" sec:authentication="name"></span>
+            <form th:action="@{/logout}" method=
+            "post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
     </div>
-   
 
-    <table class="table table-striped">
-		<tr>
-			<th>Date</th>
-            <th>Movie</th>
-            <th>Comment</th>
-            <th sec:authorize="hasAuthority('ADMIN')"></th>
-            <th></th>
-		</tr>
+    <div id="content">
+        <h1>Watches</h1>
 
-		<tr th:each="watch : ${watches}">
-			<td th:text="${watch.date}"></td>
-            <td th:text="${watch.movie.title}"></td>
-            <td th:text="${watch.comment}"></td>
+        <table class="table table-striped">
+            <tr>
+                <th>Date</th>
+                <th>Movie</th>
+                <th>Comment</th>
+                <th sec:authorize="hasAuthority('ADMIN')"></th>
+                <th></th>
+            </tr>
     
-            <td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{watches/{id}/delete (id=${watch.watchid})}" class="btn btn-danger">Delete</a> </td>
-            <td><a th:href="@{watches/{id}/edit(id=${watch.watchid})}" class="btn btn-primary">Edit watch</a> </td>
-		</tr>
-	</table>
+            <tr th:each="watch : ${watches}">
+                <td th:text="${watch.date}"></td>
+                <td th:text="${watch.movie.title}"></td>
+                <td th:text="${watch.comment}"></td>
+        
+                <td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{deletewatch/{id} (id=${watch.watchid})}" class="btn btn-danger">Delete</a> </td>
+                <td><a th:href="@{editwatch/{id}(id=${watch.watchid})}" class="btn btn-primary">Edit watch</a> </td>
+            </tr>
+        </table>
+    
+        <a href="/addwatch" class="btn btn-success">Add a new watch</a> 
 
-    <a href="/addwatch" class="btn btn-success">Add a new watch</a> 
+    </div>
+    
     
 </body>
 </html>

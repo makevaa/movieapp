@@ -17,14 +17,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 
 @Entity
 @Table(name = "watch") 
 public class Watch {
-
- 
-   
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -32,6 +30,7 @@ public class Watch {
     private Long watchid;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Select date")
     private Date date;
     
     private String comment;

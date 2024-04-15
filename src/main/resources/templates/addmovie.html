@@ -8,26 +8,55 @@
     <title>Add movie</title>
 </head>
 <body>
-    <h1>Add movie</h1>
+    <div id="topbar">
+        <div class="title">MovieApp</div>
+        <div class="menu">
+            <a href="/movielist" class="item">Movies</a>
+            <a href="/watchlist" class="item">Watches</a>
+            <a href="/addmovie" class="item selected">Add movie</a>
+            <a href="/addwatch" class="item">Add watch</a>
+        </div>
+        <div id="user-container">
+            <span class="username" sec:authentication="name"></span>
+            <form th:action="@{/logout}" method=
+            "post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
 
-    <form action="#" th:action="@{/savemovie}" method="post" th:object="${movie}">
-        <p> Title: <input type="text" th:field="${movie.title}" /> </p>
-        <p> Release year: <input type="text" th:field="${movie.releaseYear}" /> </p>
-
-        <!--
-        <label for="category-list">Movie tags:</label>
-        <select id="category-list" th:field="*{category}">
-            <option th:each="category: ${categories}" 
-                    th:value="${category.categoryid}" 
-                    th:text="${category.name}">
-            </option>
-        </select>
-        -->
+    <div id="content">
+        <h1>Add movie</h1>
 
 
-        <br><br>
-        <input type="submit" value="Save new movie"  />
-    </form>
+        <form action="#" th:action="@{/savemovie}" th:object="${movie}" method="post">
+            <table>
+                <tr>
+                    <td>Title: <input type="text" th:field="*{title}" /> </td>
+                    <td th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</td>
+                </tr>
+              
+                <tr>
+                    <td>Release year: <input type="text" th:field="*{releaseYear}"/> </td>
+                    <td th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}">Error</td>
+                </tr>
+            </table>
+            
+            <br><br>
+            <input type="submit" value="Save new movie"  />
+        </form>
+    
+                <!--
+            <label for="category-list">Movie tags:</label>
+            <select id="category-list" th:field="*{category}">
+                <option th:each="category: ${categories}" 
+                        th:value="${category.categoryid}" 
+                        th:text="${category.name}">
+                </option>
+            </select>
+            -->
+        
+    </div>
     
 </body>
 </html>

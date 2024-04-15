@@ -8,39 +8,60 @@
     <title>Add watch</title>
 </head>
 <body>
-    <h1>Add watch</h1>
+    <div id="topbar">
+        <div class="title">MovieApp</div>
+        <div class="menu">
+            <a href="/movielist" class="item">Movies</a>
+            <a href="/watchlist" class="item">Watches</a>
+            <a href="/addmovie" class="item">Add movie</a>
+            <a href="/addwatch" class="item selected">Add watch</a>
+        </div>
+        <div id="user-container">
+            <span class="username" sec:authentication="name"></span>
+            <form th:action="@{/logout}" method=
+            "post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
 
-    <form action="#" th:action="@{/savewatch}" method="post" th:object="${watch}">
-        <p> Date: <input type="date" placeholder="dd.mm.yyyy" th:field="${watch.date}" /> </p>
-
-        <p>
-            <label for="movie-list">Movie:</label>
-            <select id="movie-list" th:field="*{movie}">
-                <option th:each="movie: ${movies}" 
-                        th:value="${movie.movieid}" 
-                        th:text="${movie.title}">
-                </option>
-            </select>
+    <div id="content">
+        <h1>Add watch</h1>
 
 
-        </p>
-       
-        
-        <!--<p> Movie: <input type="text" th:field="${watch.movie}" /> </p>-->
-        <!--
-        <label for="category-list">Movie tags:</label>
-        <select id="category-list" th:field="*{category}">
-            <option th:each="category: ${categories}" 
-                    th:value="${category.categoryid}" 
-                    th:text="${category.name}">
-            </option>
-        </select>
-        -->
-        <p> Comment: <input type="text" th:field="${watch.comment}" style="width: 300px;"  /> </p>
-
-        <br><br>
-        <input type="submit" value="Save new watch"  />
-    </form>
+        <form action="#" th:action="@{/savewatch}" method="post" th:object="${watch}">
+            <table>
+                <tr>
+              
+                    <td>Date: <input type="date" placeholder="dd.mm.yyyy" th:field="*{date}" /></td>
+                    <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Error</td>
+                    
+                </tr>
+    
+                <tr>
+                    <td>
+                        <label for="movie-list">Movie:</label>
+                        <select id="movie-list" th:field="*{movie}">
+                            <option th:each="movie: ${movies}" 
+                                    th:value="${movie.movieid}" 
+                                    th:text="${movie.title}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
+    
+                <tr>
+                    <td>
+                        Comment: <input type="text" th:field="*{comment}" style="width: 300px;"  />
+                    </td>
+                </tr>
+            </table>
+    
+            <br><br>
+            <input type="submit" value="Save new watch"  />
+        </form>
+    </div>
+   
     
 </body>
 </html>

@@ -1,6 +1,5 @@
 package hh.sof3.movieapp.domain;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -11,10 +10,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -26,8 +28,13 @@ public class Movie {
     @Column (name = "movieid")
     private Long movieid;
 
+    @NotBlank(message = "Enter movie title")
     private String title;
 
+
+    //@Min(value=4, message = "Enter year in YYYY format")
+    //@Min(4)
+    //@Max(4)
     @Column (name = "releaseYear")
     private Integer releaseYear;
     

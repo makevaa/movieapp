@@ -8,25 +8,29 @@
     <title>Edit watch</title>
 </head>
 <body>
-    <h1>Edit watch</h1>
 
-    <form action="#" th:action="@{/savewatch}" method="post" th:object="${watch}">
-        <p> Date: <input type="date" placeholder="dd.mm.yyyy" th:field="${watch.date}" /> </p>
+    <div id="content">
+        <h1>Edit watch</h1>
 
-        <p>
-            <label for="movie-list">Movie:</label>
-            <select id="movie-list" th:field="*{movie}">
-                <option th:each="movie: ${movies}" 
-                        th:value="${movie.movieid}" 
-                        th:text="${movie.title}">
-                </option>
-            </select>
-        </p>
-       
-        <p> Comment: <input type="text" th:field="${watch.comment}" style="width: 300px;"  /> </p>
-        <input type="hidden" th:field="${watch.watchid}" />
-        <br><br>
-        <input type="submit" value="Save changes"  />
-    </form>
+        <form action="#" th:action="@{/savewatch}" method="post" th:object="${watch}">
+            <p> Date: <input type="date" placeholder="dd.mm.yyyy" th:field="${watch.date}" /> </p>
+    
+            <p>
+                <label for="movie-list">Movie:</label>
+                <select id="movie-list" th:field="*{movie}">
+                    <option th:each="movie: ${movies}" 
+                            th:value="${movie.movieid}" 
+                            th:text="${movie.title}">
+                    </option>
+                </select>
+            </p>
+           
+            <p> Comment: <input type="text" th:field="${watch.comment}" style="width: 300px;"  /> </p>
+            <input type="hidden" th:field="${watch.watchid}" />
+            <br><br>
+            <input type="submit" value="Save changes"  />
+        </form>
+    </div>
+    
 </body>
 </html>

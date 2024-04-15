@@ -1,9 +1,6 @@
 package hh.sof3.movieapp;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +8,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.repository.CrudRepository;
 
 import hh.sof3.movieapp.domain.Movie;
 import hh.sof3.movieapp.domain.MovieRepository;
@@ -58,7 +54,11 @@ public class MovieApplication {
 			movieRepository.save(new Movie("Freaks", 2018)); 
 			movieRepository.save(new Movie("Rosemary's Baby", 1968)); 
 			movieRepository.save(new Movie("The Killing", 1956)); 
-
+			movieRepository.save(new Movie("Spider-Man: No Way Home", 2021)); 
+			movieRepository.save(new Movie("Legend of Hell House", 1973)); 
+			movieRepository.save(new Movie("Halloween", 1978)); 
+			movieRepository.save(new Movie("Dune", 2021)); 
+			movieRepository.save(new Movie("Men", 2022)); 
 
 			SimpleDateFormat fdate = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -83,10 +83,6 @@ public class MovieApplication {
 			/* 
 			for (Category category : categoryRepository.findAll() ) {
 				log.info(category.toString());
-			}
-
-			for (User user : userRepository.findAll() ) {
-				log.info(user.toString());
 			}
 			*/
 		};
