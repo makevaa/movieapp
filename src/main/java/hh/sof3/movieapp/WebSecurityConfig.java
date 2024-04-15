@@ -42,6 +42,8 @@ public class WebSecurityConfig  {
             .requestMatchers(antMatcher("/movies")).permitAll()
             .requestMatchers(antMatcher("/watchlist")).permitAll()
             .requestMatchers(antMatcher("/watches")).permitAll()
+            .requestMatchers(antMatcher("/genrelist")).permitAll()
+            .requestMatchers(antMatcher("/genres")).permitAll()
             .requestMatchers(toH2Console()).permitAll()
         	.anyRequest().authenticated()
       )
@@ -54,7 +56,7 @@ public class WebSecurityConfig  {
     )
     .formLogin(formlogin -> formlogin
         .loginPage("/login")
-        .defaultSuccessUrl("/index", true)
+        .defaultSuccessUrl("/movielist", true)
         .permitAll()
     )
     .logout(logout -> logout

@@ -1,5 +1,6 @@
 body {
     xpadding:5px;
+    background-color:rgba(26, 38, 51, 0.7);
 }
 
 form > table > tr > td {
@@ -10,10 +11,9 @@ form > table > tr > td {
 
 #topbar {
     width:100vw;
-    xheight:50px;
-    xpadding:5px;
+    height:60px;
     background-color:rgb(49, 49, 49);
-    box-shadow: 0px 5px 4px rgba(0,0,0,0.5);
+    box-shadow: 0px 5px 7px rgba(0,0,0,0.7);
     display:flex;
     align-items: center;
     justify-content: left;
@@ -23,13 +23,14 @@ form > table > tr > td {
     font-size: 2em;
     padding:5px;
     color: white;
+    height:100%;
 }
 
 #topbar > .menu {
     color:grey;
     display:flex;
     height:100%;
-    flex:0.9;
+
 }
 
 #topbar > .menu > .item {
@@ -37,17 +38,23 @@ form > table > tr > td {
 	height:100%;
 	vertical-align:middle;
 	padding:10px 20px 10px 20px;
-	font-size:1.5em;
+	font-size:1.1em;
 	text-decoration:none;
 	transition: all 0.1s;
 	color:#00cc66;
+    xcolor:#cc9900;
 	margin:0px;
 	text-align:center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
 }
 #topbar > .menu > .item:hover {
 	background-color:rgba(0,0,0,0.5);
 	color:#1bff8d;
+    xcolor:#ffd34f;
 	text-shadow:0px 0px 15px #44ff79, 0px 0px 90px white ; 
+    xtext-shadow:0px 0px 15px #ffe044, 0px 0px 90px white ; 
 }
 
 #topbar > .menu > .item.selected {
@@ -55,19 +62,34 @@ form > table > tr > td {
 }
 
 #user-container {
+    xborder:1px solid red;
     display:flex;
-    align-items: center;
-    justify-content: center;
+    xflex-direction:column;
+    align-items: end;
+    justify-content: end;
+    padding-right: 30px;
     color:white;
-    float:right;
+    flex:1;
 }
 
 #user-container > .username {
-    font-size: 1.5em;
+    font-size: 1em;
     padding:5px;
 }
 
 #content {
     padding:5px;
+    width:100%;
+    max-width:1000px;
+    margin:auto;
+    margin-top:10px;
+    background-color:rgba(255,255,255,0.9);
+    padding:5px 20px 20px 20px;
+    border-radius:5px;
+    box-shadow:5px 5px 5px rgba(0,0,0,0.5);
 }
 
+#genre-list {
+    width: 500px;
+    height:100px;
+}

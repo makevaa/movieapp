@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <link type="text/css" rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <title>Add movie</title>
 </head>
 <body>
@@ -13,8 +17,11 @@
         <div class="menu">
             <a href="/movielist" class="item">Movies</a>
             <a href="/watchlist" class="item">Watches</a>
+            <a href="/genrelist" class="item">Genres</a>
             <a href="/addmovie" class="item selected">Add movie</a>
             <a href="/addwatch" class="item">Add watch</a>
+            <a href="/addgenre" class="item">Add genre</a>
+            <a href="/apipage" class="item">API</a>
         </div>
         <div id="user-container">
             <span class="username" sec:authentication="name"></span>
@@ -40,23 +47,31 @@
                     <td>Release year: <input type="text" th:field="*{releaseYear}"/> </td>
                     <td th:if="${#fields.hasErrors('releaseYear')}" th:errors="*{releaseYear}">Error</td>
                 </tr>
+
+                <tr>
+                    <td>
+                        <label for="genre-list">Movie genres:</label>
+                        <select multiple id="genre-list" th:field="*{genres}" class="js-example-basic-single">
+                            <option th:each="genre: ${allGenres}" 
+                                    th:value="${genre.genreid}" 
+                                    th:text="${genre.name}">
+                            </option>
+                        </select>
+                    </td>
+                </tr>
             </table>
             
             <br><br>
             <input type="submit" value="Save new movie"  />
         </form>
-    
-                <!--
-            <label for="category-list">Movie tags:</label>
-            <select id="category-list" th:field="*{category}">
-                <option th:each="category: ${categories}" 
-                        th:value="${category.categoryid}" 
-                        th:text="${category.name}">
-                </option>
-            </select>
-            -->
+ 
         
     </div>
-    
+
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 </body>
 </html>

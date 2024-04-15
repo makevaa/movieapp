@@ -1,8 +1,5 @@
 package hh.sof3.movieapp.web;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +66,7 @@ public class WatchController {
     @RequestMapping(value="deletewatch/{id}", method=RequestMethod.GET)
     public String DeleteWatchById(@PathVariable("id") Long watchId, Model model) {
         watchRepository.deleteById(watchId);
-        return "redirect:../../watchlist";
+        return "redirect:../watchlist";
     }
 
 }

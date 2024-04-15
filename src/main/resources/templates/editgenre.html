@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}" />
+    <title>Edit genre</title>
+</head>
+<body>
+    <div id="content">
+        <h1>Edit genre</h1>
+
+        <form action="#" th:action="@{/savegenre}" method="post" th:object="${genre}">
+            <p> Name: <input type="text" th:field="${genre.name}" /> </p>
+    
+            <input type="hidden" th:field="${genre.genreid}" />
+            <input type="submit" value="Save changes" />
+        </form>
+    </div>
+   
+    
+</body>
+</html>

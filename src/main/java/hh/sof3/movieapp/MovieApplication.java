@@ -15,6 +15,8 @@ import hh.sof3.movieapp.domain.User;
 import hh.sof3.movieapp.domain.UserRepository;
 import hh.sof3.movieapp.domain.Watch;
 import hh.sof3.movieapp.domain.WatchRepository;
+import hh.sof3.movieapp.domain.Genre;
+import hh.sof3.movieapp.domain.GenreRepository;
 
 @SpringBootApplication
 public class MovieApplication {
@@ -26,18 +28,10 @@ public class MovieApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(MovieRepository movieRepository, UserRepository userRepository, WatchRepository watchRepository) {
+	public CommandLineRunner demo(MovieRepository movieRepository, UserRepository userRepository, WatchRepository watchRepository, GenreRepository genreRepository) {
 		return (args) -> {
 
-			/* 
-			Category cat1 = new Category("scifi");
-			Category cat2 = new Category("fantasy");
-			Category cat3 = new Category("horror");
-			categoryRepository.save(cat1);
-			categoryRepository.save(cat2);
-			categoryRepository.save(cat3);
-			*/
-
+			// Create test movies
 			Movie mov1 = new Movie("A Nightmare on Elm Street", 1984);
 			Movie mov2 = new Movie("The Truman Show", 1998);
 			Movie mov3 = new Movie("Apocalypse Now", 1979);
@@ -59,14 +53,32 @@ public class MovieApplication {
 			movieRepository.save(new Movie("Halloween", 1978)); 
 			movieRepository.save(new Movie("Dune", 2021)); 
 			movieRepository.save(new Movie("Men", 2022)); 
+			movieRepository.save(new Movie("The Wicker Man", 1973)); 
 
 			SimpleDateFormat fdate = new SimpleDateFormat("dd.MM.yyyy");
 
+			// Create test watches
 			Watch w1 = new Watch( fdate.parse("04.04.2024" ), mov1, "ihan hyvä leffa");
 			Watch w2 = new Watch( fdate.parse("11.02.2024" ), mov3, "");
 
 			watchRepository.save(w1);
 			watchRepository.save(w2);
+
+			// Create test genres
+			Genre g1 = new Genre("Comedy");
+			Genre g2 = new Genre("Drama");
+			Genre g3 = new Genre("Mystery");
+			Genre g4 = new Genre("War");
+
+			genreRepository.save(g1);
+			genreRepository.save(g2);
+			genreRepository.save(g3);
+			genreRepository.save(g4);
+
+			genreRepository.save(new Genre("Horror"));
+			genreRepository.save(new Genre("Adventure"));
+			genreRepository.save(new Genre("Scifi"));
+			genreRepository.save(new Genre("Fantasy"));
 			
 
 			// Create users: admin/admin user/user

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <link type="text/css" rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <title>Edit movie</title>
 </head>
 <body>
@@ -14,12 +17,26 @@
         <form action="#" th:action="@{/savemovie}" method="post" th:object="${movie}">
             <p> Title: <input type="text" th:field="${movie.title}" /> </p>
             <p> Publication year: <input type="text" th:field="${movie.releaseYear}" /> </p>
+
+            <br><br>
+            <label for="genre-list">Movie genres:</label>
+            <select multiple id="genre-list" th:field="*{genres}" class="js-example-basic-single">
+                <option th:each="genre: ${allGenres}" 
+                        th:value="${genre.genreid}" 
+                        th:text="${genre.name}">
+                </option>
+            </select>
+             
     
             <input type="hidden" th:field="${movie.movieid}" />
             <input type="submit" value="Save changes" />
         </form>
     </div>
    
-    
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script> 
 </body>
 </html>

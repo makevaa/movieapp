@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <link type="text/css" rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}" />
+
+    <title>Api</title>
+</head>
+<body>
+    <div id="topbar">
+        <div class="title">MovieApp</div>
+        <div class="menu">
+            <a href="/movielist" class="item">Movies</a>
+            <a href="/watchlist" class="item">Watches</a>
+            <a href="/genrelist" class="item">Genres</a>
+            <a href="/addmovie" class="item">Add movie</a>
+            <a href="/addwatch" class="item">Add watch</a>
+            <a href="/addgenre" class="item">Add genre</a>
+            <a href="/apipage" class="item selected">API</a>
+        </div>
+        <div id="user-container">
+            <span class="username" sec:authentication="name"></span>
+            <form th:action="@{/logout}" method=
+            "post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+    </div>
+
+    <div id="content">
+        <h1>API</h1>
+
+        <ul>
+            <li>GET <a href="/movies">/movies</a> </li> 
+            <li>GET <a href="/movies/1">/movies/1</a> </li>
+            <li>PUT <a href="/movies/1">/movies/1</a> </li>
+            <li>DELETE <a href="/movies/1">/movies/1</a> </li>
+            <br>
+
+            <li>GET <a href="/watches">/watches</a> </li>
+            <li>GET <a href="/watches/1">/watches/1</a> </li>
+            <li>PUT <a href="/watches/1">/watches/1</a> </li>
+            <li>DELETE <a href="/watches/1">/watches/1</a> </li>
+            <br>
+           
+            <li>GET <a href="/genres">/genres</a> </li>
+            <li>GET <a href="/genres/1">/genres/1</a> </li>
+            <li>PUT <a href="/genres/1">/genres/1</a> </li>
+            <li>DELETE <a href="/genres/1">/genres/1</a> </li>
+
+
+        </ul>
+
+
+        </form>
+ 
+        
+    </div>
+
+
+</body>
+</html>

@@ -10,13 +10,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -43,7 +42,17 @@ public class Movie {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "movie")
     @JsonIgnoreProperties("movie") 
     private List<Watch> watches;
+
+    @ManyToMany(cascade = { CascadeType.MERGE })
+    @JoinTable(
+        name = "MovieGenre", 
+        joinColumns = { @JoinColumn(name = "movieid") }, 
+        inverseJoinColumns = { @JoinColumn(name = "genreid") }
+    )
+    private List<Genre> genres;
     
+
+
 
     public Movie() {
         super();
@@ -90,6 +99,15 @@ public class Movie {
     public void setWatches(List<Watch> watches) {
         this.watches = watches;
     }
+
+    public List<Genre> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genre> genres) {
+        this.genres = genres;
+    }
+
 
     @Override
     public String toString() {

@@ -7,22 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
     <link type="text/css" rel="stylesheet" href="/css/style.css" th:href="@{/css/style.css}" />
-    <title>Movies</title>
+    <title>Watches</title>
 </head>
 <body>
-
     <div id="topbar">
         <div class="title">MovieApp</div>
         <div class="menu">
-            <a href="/movielist" class="item selected">Movies</a>
+            <a href="/movielist" class="item">Movies</a>
             <a href="/watchlist" class="item">Watches</a>
-            <a href="/genrelist" class="item">Genres</a>
+            <a href="/genrelist" class="item selected">Genres</a>
             <a href="/addmovie" class="item">Add movie</a>
             <a href="/addwatch" class="item">Add watch</a>
             <a href="/addgenre" class="item">Add genre</a>
             <a href="/apipage" class="item">API</a>
         </div>
-
         <div id="user-container">
             <span class="username" sec:authentication="name"></span>
             <form th:action="@{/logout}" method=
@@ -33,28 +31,29 @@
     </div>
 
     <div id="content">
-        <h1>All movies</h1>
-        <a href="/addmovie" class="btn btn-success">Add movie</a> 
-    
+        <h1>Genres</h1>
+
+        <a href="/addgenre" class="btn btn-success">Add genre</a> 
+
         <table class="table table-striped">
             <tr>
-                <th>Title</th>
-                <th>Year</th>
-    
+                <th>name</th>
                 <th sec:authorize="hasAuthority('ADMIN')"></th>
                 <th sec:authorize="hasAuthority('ADMIN')"></th>
             </tr>
     
-            <tr th:each="movie : ${movies}">
-                <td th:text="${movie.title}"></td>
-                <td th:text="${movie.releaseYear}"></td>
+            <tr th:each="genre : ${genres}">
+                <td th:text="${genre.name}"></td>
         
-                <td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{../deletemovie/{id} (id=${movie.movieid})}" class="btn btn-danger">Delete</a> </td>
-                <td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{editmovie/{id} (id=${movie.movieid})}" class="btn btn-primary">Edit movie</a> </td>
+                <td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{deletegenre/{id} (id=${genre.genreid})}" class="btn btn-danger">Delete</a> </td>
+                <td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{editgenre/{id}(id=${genre.genreid})}" class="btn btn-primary">Edit genre</a> </td>
             </tr>
         </table>
     
+      
+
     </div>
+    
     
 </body>
 </html>

@@ -1,8 +1,5 @@
 package hh.sof3.movieapp.web;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import hh.sof3.movieapp.domain.GenreRepository;
 import hh.sof3.movieapp.domain.Movie;
 import hh.sof3.movieapp.domain.MovieRepository;
 import jakarta.validation.Valid;
@@ -24,6 +21,9 @@ public class MovieController {
 
     @Autowired
 	private MovieRepository movieRepository; 
+
+    @Autowired
+	private GenreRepository genreRepository; 
 
 
     // Show login page
@@ -38,6 +38,12 @@ public class MovieController {
         return "index";
     }
 
+    // Show API page
+    @RequestMapping(value="/apipage", method=RequestMethod.GET)
+    public String showApiPage() {
+        return "apipage";
+    }
+
     // Show all movies
     @RequestMapping(value="/movielist", method=RequestMethod.GET)
     public String showBookList(Model model) {
@@ -49,7 +55,7 @@ public class MovieController {
     @RequestMapping(value="/addmovie", method=RequestMethod.GET)
     public String showAddMovie(Model model) {
         model.addAttribute("movie", new Movie());
-        //model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("allGenres", genreRepository.findAll());
         return "addmovie";
     }
 
@@ -58,6 +64,7 @@ public class MovieController {
     public String showEditPage(@PathVariable("id") Long movieId, Model model) {
         Movie movie = movieRepository.findById(movieId).get();
         model.addAttribute("movie", movie);
+        model.addAttribute("allGenres", genreRepository.findAll());
         return "editmovie";
     }
 
@@ -65,6 +72,8 @@ public class MovieController {
     @RequestMapping(value="/savemovie", method=RequestMethod.POST)
     public String save( @Valid  @ModelAttribute("movie") Movie movie, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) { // validation errors 
+            //model.addAttribute("movie", new Movie());
+            model.addAttribute("allGenres", genreRepository.findAll());
 			return "addmovie";  // return back to form
 		} else { // no validation errors
             movieRepository.save(movie);
