@@ -49,7 +49,7 @@ public class GenreController {
     }
 
     // Save new genre (or update if Genre has id)
-    @RequestMapping(value="/saveGenre", method=RequestMethod.POST)
+    @RequestMapping(value="/savegenre", method=RequestMethod.POST)
     public String save( @Valid  @ModelAttribute("genre") Genre genre, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) { // validation errors 
 			return "addgenre";  // return back to form
